@@ -13,8 +13,9 @@ class Home extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <div className='container'>
-            <h1>IP Finder</h1>
+        <div className='container border'>
+            <div className='magnifyingGlass'></div>
+            <h1>IP Finder V1</h1>
         </div>
       </React.Fragment>
     )

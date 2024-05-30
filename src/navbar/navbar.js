@@ -96,7 +96,7 @@ class Navbar extends React.Component {
             <div className="container-fluid footer">
               <div className="d-flex row">
                 <div className="col-6">
-                  <p className="footerItem">&copy; Collin Dapper</p>
+                  <p className="footerItem">&copy; Collin Dapper - IP Finder v1</p>
                 </div>
                 
               </div>
