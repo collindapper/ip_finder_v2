@@ -1,4 +1,4 @@
-/* BODY */
+/* General */
 .fontPrimary {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
@@ -24,10 +24,9 @@
   }
   
   .navbar {
-    /* backdrop-filter: blur(10px);*/  
-    /*background-color: rgb(255, 255, 255);*/
+    height: 60px;
     width: 100%;
-    /*border-radius: 50px;*/
+    background: #0e0e0e;
   }
   
   .scrolled-down {
@@ -103,4 +102,9 @@
   
   .hamburger-icon.is-open::after {
     transform: rotate(45deg) translate(30px, -42px);
+  }
+
+  /* Footer */
+  .footerItem {
+    color: white;
   }

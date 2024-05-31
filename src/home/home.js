@@ -1,6 +1,9 @@
 import React from 'react';
-import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Fade';
 import './home.css';
+
+// Custom imports
+//import MatrixBackground from '../matrixBackground';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,9 +16,8 @@ class Home extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <div className='container border'>
-            <div className='magnifyingGlass'></div>
-            <h1>IP Finder V1</h1>
+        <div className='container animation'>
+          <h1 className="display-1">IP Finder</h1>
         </div>
       </React.Fragment>
     )
