@@ -16,8 +16,10 @@ class Home extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <div className='container animation'>
-          <h1 className="display-1">IP Finder</h1>
+        <div className='container homePage'>
+          <div className='headingWrapper d-flex mx-auto'>
+            <h1 className="container heading fontPrimary display-1 text-center my-auto">IP FINDER</h1>
+          </div>
         </div>
       </React.Fragment>
     )

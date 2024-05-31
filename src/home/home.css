@@ -1,14 +1,32 @@
-h1 {
-    color: red; 
-    font-family: "Courier";
-    font-size: 20px;
-    margin: 10px 0 0 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 30em;
-    animation: type 10s steps(60, end); 
-  }
+/* Formatting */
+.homePage {
+  height: 85vh;
+  width: auto;
+  padding-top: 100px;
+}
+
+.fontPrimary {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-style: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 65%;
+  animation: type 8s steps(60, end);
+}
+
+/* Heading */  
+@keyframes type{ 
+  from { width: 0; } 
+} 
+
+.heading {
+  color: #0f0;
+}
+
+.headingWrapper {
+  background: #0e0e0e;
+  width: 65%;
   
-  @keyframes type{ 
-    from { width: 0; } 
-  } 
+  box-shadow: 0px 2px 7px 7px rgba(255, 255, 255, 0.4);
+}
