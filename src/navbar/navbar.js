@@ -1,6 +1,7 @@
 import React from 'react';
 import './navbar.css';
 
+// Custom imports
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -52,41 +53,13 @@ class Navbar extends React.Component {
       <React.Fragment>
           <nav className={`${(scrolled && "scrolled-down shadow-lg") || (!scrolled && "navbar")} navbar-expand-md sticky-top `}>
             <div className="navbar container-fluid d-none d-md-flex row">
-                <div className="d-flex justify-content-between">
-                <a className="d-md-flex navbar-brand text-black fontPrimary col-4 ms-md-5" href="/">COLLIN<strong>DAPPER</strong></a>
+                <div className="d-flex justify-content-center">
+                <a className="d-md-flex navbar-brand text-white fontPrimary col-4 ms-md-5 text-center" href="/"><strong>IP</strong>Finder</a>
                 </div>
             </div>
-
-          <div className="container d-flex d-md-none sticky-top justify-content-between">
-            <a className="d-md-none d-flex navbar-brand text-black fontPrimary my-auto" href="/">COLLIN<strong>DAPPER</strong></a>
-              <button className="d-md-none hamburger-toggle" onClick={this.toggleNavbarOpen}>
-                <span className={`hamburger hamburger-icon ${navbarOpen && "is-open"}`}></span>
-              </button>
-            </div>
-
-              {navbarOpen ?
-                <div className="d-flex row me-auto ms-5">
-                  <ul className="navbar-nav me-auto mb-2">
-                    <li className="nav-item fontNavigation text-start">
-                      <a className="nav-link text-black fontNavigation" href="/">Home</a>
-                    </li>
-                    <li className="nav-item fontNavigation text-start">
-                      <a className="nav-link text-black fontNavigation" href="/about">Experience</a>
-                    </li>
-                    <li className="nav-item fontNavigation text-start">
-                      <a className="nav-link text-black fontNavigation" href="/projects">Projects</a>
-                    </li>
-                    <li className="nav-item fontNavigation text-start">
-                      <a className="nav-link text-black fontNavigation" href="/skills">Skills</a>
-                    </li>
-                  </ul>
-                </div>
-                :
-                null
-              }
           </nav>
           
-
+          
           <div id="mainContent" className="mainContent mb-3">
             {this.props.children}
           </div>
