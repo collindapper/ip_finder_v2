@@ -3,7 +3,7 @@ import Flip from 'react-reveal/Fade';
 import './home.css';
 
 // Custom imports
-import MatrixBackground from '../matrixBackground';
+//import MatrixBackground from '../matrixBackground';
 
 class Home extends React.Component {
   constructor(props) {
