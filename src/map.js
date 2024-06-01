@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'; 
-import ReactMapGL, { Marker } from 'react-map-gl'; 
-import { RiUserLocationFill } from 'react-icons/ri'; 
+import Map, { Marker } from 'react-map-gl'; 
+import { RiUserLocationFill } from 'react-icons/ri';
+import 'mapbox-gl/dist/mapbox-gl.css';
   
-const API_KEY = process.env.MAPBOX_API; 
+const API_KEY = process.env.MAPBOX_API;
   
-const Map = ({ lat, lon }) => { 
+const SearchableMap = ({ lat, lon }) => { 
   
     // Setting up the initial viewport of the map 
     const [viewport, setViewport] = useState({ 
         latitude: lat, 
         longitude: lon, 
-        zoom: 14, 
+        zoom: 12, 
         bearing: 0, 
         pitch: 0, 
         width: '100%', 
@@ -19,28 +20,23 @@ const Map = ({ lat, lon }) => {
   
     // Viewport re-renders whenever latitude 
     // and longitude changes 
-    useEffect(() => { 
-        const a = { ...viewport }; 
-        a.latitude = lat; 
-        a.longitude = lon; 
-        setViewport(a); 
-    }, [lat, lon]); 
+    
   
     return ( 
         <div className="map"> 
-            <ReactMapGL 
-                mapboxApiAccessToken={API_KEY} 
+            <Map 
+                mapboxAccessToken='pk.eyJ1IjoiY29sbGluZGFwcGVyIiwiYSI6ImNsd3V6eDdnbjBqcjUya3BzNjRueHBqaWQifQ.bwouVpfqFDHAKdJKMVK0Kw'
                 {...viewport} 
                 onViewportChange={(viewport) => setViewport(viewport)} 
-                mapStyle="mapbox://styles/mapbox/streets-v11"> 
+                mapStyle="mapbox://styles/mapbox/dark-v11"> 
                 <Marker latitude={lat} longitude={lon}> 
                     <div className="mark"> 
-                        <RiUserLocationFill size="25px" color="blue" /> 
+                        <RiUserLocationFill size="20px" color="green" /> 
                     </div> 
                 </Marker> 
-            </ReactMapGL> 
+            </Map> 
         </div> 
     ); 
 }; 
   
-export default Map;
+export default SearchableMap;

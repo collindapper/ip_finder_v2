@@ -1,9 +1,9 @@
 import React from 'react';
 import useState from 'react';
 import { json, checkStatus } from '../utils';
-import Axios from 'axios';
-import Map from '../map';
+import SearchableMap from '../map';
 import './home.css';
+
 
 
 class Home extends React.Component {
@@ -12,11 +12,18 @@ class Home extends React.Component {
     this.state = {
       ipSearched: '',
       ipDetails: [],
+      lat: '22.5726',
+      lon: '88.3832',
       error: '',
+      isSubmitted: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ isSubmitted: false });
   }
 
   handleChange(event) {
@@ -39,8 +46,11 @@ class Home extends React.Component {
         console.log(Object.entries(data));
         
           this.setState({ 
-            ipDetails: data, 
+            ipDetails: data,
+            lat: data.latitude,
+            lon: data.longitude,
             error: '',
+            isSubmitted: true,
           });
       })
       .catch((error) => {
@@ -52,7 +62,7 @@ class Home extends React.Component {
 
   render() {
       // Set up initial state variables 
-      const { ipSearched, ipDetails, error } = this.state;
+      const { ipSearched, ipDetails, lat, lon, isSubmitted, error } = this.state;
 
     return (
       <div className='container homePage'>
@@ -68,17 +78,13 @@ class Home extends React.Component {
         </form>
 
         {/* Call searched results */}
-        {(() => {
-          if (error) {
-            return error;
-          }
-          return (
+        {isSubmitted && !error ?
             <div className='container row d-flex justify-content-around mx-auto'>
             <div className='column mapColumn col-12 col-md-5'>
-              
+              <SearchableMap lat={lat} lon={lon} />
             </div>
             
-            <div className='column inputColumn col-12 col-md-5 py-3'>
+            <div className='column inputColumn col-12 col-md-5 py-3 mt-5 mt-md-0'>
               <h4 className='fontPrimary'>What is the IPv4 address?</h4>
               <h3 id='ip' className='fontPrimary'>{ipDetails.ip}</h3>
               <h4 className='fontPrimary'>Approximate location: </h4>
@@ -89,8 +95,9 @@ class Home extends React.Component {
               <h3 className='fontPrimary'>{ipDetails.org}</h3>
             </div>
           </div>
-          );
-        })()};
+          :
+          null
+        }
       </div>
     )
   }
