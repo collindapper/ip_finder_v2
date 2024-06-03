@@ -38,15 +38,36 @@
   margin-bottom: 50px;
 }
 
-.input {
-  width: 60%;
-  background: rgb(255, 255, 255);
-  box-shadow: 0px 1px 5px 3px rgba(0, 255, 0, 0.4);
-  border: none;
-  border-radius: 5px;
+@media screen and (max-width: 640px) {
+  .input {
+    width: 45%;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 1px 5px 3px rgba(0, 255, 0, 0.4);
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .input {
+    width: 60%;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 1px 5px 3px rgba(0, 255, 0, 0.4);
+    border: none;
+    border-radius: 5px;
+  }
 }
 
 .submitButton {
+  background: rgba(255, 255, 255, 0.8);
+  color: #0e0e0e;
+  padding: 4px 6px 4px 6px;
+  border: 2px solid #0e0e0e;
+  border-radius: 5px;
+}
+
+.submitButton.checked {
+  width: 60%;
   background: rgba(255, 255, 255, 0.8);
   color: #0e0e0e;
   padding: 4px 6px 4px 6px;
@@ -63,9 +84,24 @@
   box-shadow: 0px 1px 5px 3px rgba(0, 255, 0, 0.4);
 }
 
+@media screen and (max-width: 640px) {
+  .submitButton:focus {
+    background: #0e0e0e;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 4px 6px 4px 6px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px 3px rgba(0, 255, 0, 0.4);
+  }
+}
+
+label.fontPrimary {
+  color: rgb(255, 255, 255);
+}
+
 /* Map and Input Section */
 .column {
-  height: 300px;
+  height: 325px;
   background: #0e0e0e;
   border-radius: 5px;
   box-shadow: 0px 2px 7px 7px rgba(255, 255, 255, 0.4);
@@ -89,7 +125,7 @@ h3.fontPrimary {
 
 .map {
   height: 275px;
-  margin: 12px 0 0 0;
+  margin: 22px 0 0 0;
 }
 
 .mark { 

@@ -14,21 +14,29 @@ class Home extends React.Component {
       ipDetails: [],
       lat: '',
       lon: '',
-      error: 'false',
+      error: false,
       errorReason: '',
-      isSubmitted: 'false',
+      isSubmitted: false,
+      checkBox: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.findMyIp = this.findMyIp.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ isSubmitted: 'false' });
+    this.setState({ isSubmitted: false });
   }
 
   handleChange(event) {
-    this.setState({ ipSearched: event.target.value});
+    this.setState({ ipSearched: event.target.value });
+    
+  }
+
+  handleCheckbox(event) {
+    this.setState({ checkBox: event.target.checked });
   }
 
   handleSubmit(event) {
@@ -47,16 +55,16 @@ class Home extends React.Component {
         
         if (data.error === true) {
           this.setState({
-            isSubmitted: 'true',
-            error: 'true',
+            isSubmitted: true,
+            error: true,
             errorReason: data.reason,
-            lat: 22.5726,
-            lon: 88.3832,
+            lat: '22.5726',
+            lon: '88.3832',
           })
         } else {
           this.setState({ 
-            isSubmitted: 'true',
-            error: 'false',
+            isSubmitted: true,
+            error: false,
             ipDetails: data,
             lat: data.latitude,
             lon: data.longitude,            
@@ -70,9 +78,42 @@ class Home extends React.Component {
       }) 
     }
 
+    findMyIp(event) {
+      event.preventDefault(); 
+      
+      fetch('https://ipapi.co/json/')
+        .then(checkStatus)
+        .then(json)
+        .then((data) => {
+          
+          if (data.error === true) {
+            this.setState({
+              isSubmitted: true,
+              error: true,
+              errorReason: data.reason,
+              lat: '22.5726',
+              lon: '88.3832',
+            })
+          } else {
+            this.setState({ 
+              isSubmitted: true,
+              error: false,
+              ipDetails: data,
+              lat: data.latitude,
+              lon: data.longitude,            
+            });
+          }
+        })
+        .catch((error) => {
+          this.setState({ error: data.error });
+          
+          console.log(data.error);
+        }) 
+      }
+
   render() {
       // Set up initial state variables 
-      const { ipSearched, ipDetails, lat, lon, isSubmitted, error, errorReason } = this.state;
+      const { ipSearched, ipDetails, lat, lon, isSubmitted, error, errorReason, checkBox } = this.state;
 
     return (
       <div className='container homePage'>
@@ -82,13 +123,24 @@ class Home extends React.Component {
         </div>
 
         {/* Search bar */}
-        <form className='searchColumn d-flex justify-content-center' onSubmit={this.handleSubmit}>
-          <input className='input fontPrimary me-2' placeholder='Search IPv4 or IPv6 address' onChange={this.handleChange} value={ipSearched}></input>
-          <button type='submit' className='submitButton fontPrimary'>Search</button>
+        <form className='searchColumn d-flex justify-content-center' onSubmit={checkBox === true ? this.findMyIp : this.handleSubmit}>
+
+          ({checkBox === false ?
+            <input className='input fontPrimary me-1' placeholder='Search IPv4 or IPv6 address' onChange={this.handleChange} value={ipSearched}></input>
+            :
+            null
+          });
+
+          <button type='submit' className={`submitButton fontPrimary ${checkBox === true ? 'checked' : 'notChecked'}`}>Search</button>
+          
+          <div className='d-flex align-items-center ms-2'>
+            <input type='checkbox' id='checkbox' onChange={this.handleCheckbox} value={checkBox} />
+            <label htmlFor='checkbox' className='fontPrimary ms-1'>Locate my IP</label>
+          </div>
         </form>
 
         {/* Call searched results - ERROR */}
-        ({isSubmitted === 'true' && error === 'true' ?
+        ({isSubmitted === true && error === true ?
           <div className='container row d-flex justify-content-center mx-auto'>
             <div className='column errorColumn col-12 pt-2'>
               <h1 className='text-center text-danger'>ERROR!</h1>
@@ -101,14 +153,14 @@ class Home extends React.Component {
 
 
         {/* Call searched results - SUCCESS */}
-        ({isSubmitted === 'true' && error === 'false' ?
+        ({isSubmitted === true && error === false ?
             <div className='container row d-flex justify-content-around mx-auto'>
             <div className='column mapColumn col-12 col-md-5'>
               <SearchableMap lat={lat} lon={lon} />
             </div>
             
             <div className='column inputColumn col-12 col-md-5 py-3 mt-5 mt-md-0'>
-              <h4 className='fontPrimary'>What is the IPv4 address?</h4>
+              <h4 className='fontPrimary'>What is the IPv4 or IPv6 address?</h4>
               <h3 id='ip' className='fontPrimary'>{ipDetails.ip}</h3>
               <h4 className='fontPrimary'>Approximate location: </h4>
       
